@@ -63,12 +63,12 @@ def get_posts():
     # Iterate over all collections and fetch posts that match the filter
     for collection in collections.values():
         posts = list(collection.find(filter_dict))
-        all_posts = all_posts + posts 
+        all_posts = all_posts + posts
 
     # Convert the list of posts to JSON and return it
-    print(all_posts)
     data = json_util.dumps(all_posts)
     return data, 200
+
 
 @app.route("/posts/department", methods=["GET"])
 def get_posts_department():
@@ -86,25 +86,27 @@ def get_posts_department():
 
     posts = list(department_collection.find(filter_dict))
 
-    data = jsonify(posts)
+    data = json_util.dumps(posts)
     return data, 200
+
 
 @app.route("/posts/selling", methods=["GET"])
 def get_posts_selling():
     # Construct a filter dictionary based on query parameters
     filter_dict = {}
     search_term = request.args.get("search", default=None)
-    
+
     if search_term is not None:
         # Assuming the search term is applied to the title of the posts
         # For MongoDB, you can use a regular expression for case-insensitive search
         filter_dict["title"] = search_term
 
-    print(f"Search term: {search_term}, Filter: {filter_dict}") # Debugging line
+    print(f"Search term: {search_term}, Filter: {filter_dict}")  # Debugging line
     posts = list(selling_collection.find(filter_dict))
 
-    data = jsonify(posts)
+    data = json_util.dumps(posts)
     return data, 200
+
 
 if __name__ == "__main__":
     app.run(debug=True, port=5001)

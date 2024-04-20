@@ -24,5 +24,19 @@ def create_post():
     collection.insert_one(post)
     return jsonify({'message': 'Post created successfully'}), 201
 
+@app.route('/posts', methods=['GET'])
+def get_posts():
+    # Construct a filter dictionary based on query parameters
+    filter_dict = {}
+    for key in ['title', 'author', 'description', 'tab']:
+        if key in request.args:
+            filter_dict[key] = request.args[key]
+    
+    # Fetch filtered posts from the MongoDB collection
+    posts = list(collection.find(filter_dict))
+    
+    # Convert the list of posts to JSON and return it
+    return jsonify(posts)
+
 if __name__ == '__main__':
     app.run(debug=True)

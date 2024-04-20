@@ -47,7 +47,6 @@ def create_post():
 def get_posts():
     # Construct a filter dictionary based on query parameters
     filter_dict = {}
-    tab = request.args.get("tab", default=None)
     department = request.args.get("department", default=None)
     search_term = request.args.get("search", default=None)
 
@@ -55,18 +54,22 @@ def get_posts():
         filter_dict["Department"] = department
     if search_term is not None:
         # Assuming the search term is applied to the title of the posts
+        # For MongoDB, you can use a regular expression for case-insensitive search
         filter_dict["title"] = search_term
 
-    # Safely access the collection using the get() method with a default value
-    collection = collections.get(
-        tab, club_collection
-    )  # Default to club_collection if tab is None
+    # Initialize an empty list to store the results from all collections
+    all_posts = []
 
-    # Fetch filtered posts from the MongoDB collection
-    posts = list(collection.find(filter_dict))
+    # Iterate over all collections and fetch posts that match the filter
+    for collection in collections.values():
+        posts = list(collection.find(filter_dict))
+        all_posts = all_posts + posts 
+
     # Convert the list of posts to JSON and return it
-    data = json_util.dumps(posts)
+    print(all_posts)
+    data = json_util.dumps(all_posts)
     return data, 200
+
 
 
 if __name__ == "__main__":

@@ -98,6 +98,23 @@
     .search-container button:hover {
       background: #ccc;
     }
+
+    .post-box {
+    border: 1px solid #ccc;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+
+    .post-box h3 {
+        margin: 0 0 5px 0;
+    }
+
+    .post-box p {
+        margin: 0 0 5px 0;
+    }
+
  </style>
 </head>
 <body>
@@ -148,62 +165,65 @@
 
         // Add event listener to the search button
         document.getElementById('search-button').addEventListener('click', function(event) {
-            event.preventDefault(); // Prevent the default form submission
-            const searchInput = document.getElementById('search-input');
-            const searchResults = document.getElementById('search-results');
-            const searchSection = document.getElementById('section-name');
-            const searchTerm = searchInput.value;
-            const searchSec = searchSection.textContent;
-            // Send a GET request to the /posts endpoint with the search term as a query parameter
-            console.log(searchSection);
-            if (searchSec == "Department") {
-              fetch(`/posts/department?search=${encodeURIComponent(searchTerm)}`)
-              .then(response => response.json())
-              .then(posts => {
+        event.preventDefault(); // Prevent the default form submission
+        const searchInput = document.getElementById('search-input');
+        const searchResults = document.getElementById('search-results');
+        const searchSection = document.getElementById('section-name');
+        const searchTerm = searchInput.value;
+        const searchSec = searchSection.textContent;
+
+        // Function to fetch and display posts based on the search section
+        function fetchAndDisplayPosts(url) {
+            fetch(url)
+            .then(response => response.json())
+            .then(posts => {
                 // Clear previous search results
                 searchResults.innerHTML = '';
 
                 // Display the search results
                 posts.forEach(post => {
-                    const postElement = document.createElement('div');
-                    postElement.textContent = post.title; // Assuming you want to display the post title
-                    searchResults.appendChild(postElement);
-                });
-              })
-              .catch(error => console.error('Error fetching posts:', error));
+                    // Create a container for each post
+                    const postContainer = document.createElement('div');
+                    postContainer.className = 'post-box'; // Assign a class for styling
 
-            } else if (searchSec == "Selling") {
-              fetch(`/posts/selling?search=${encodeURIComponent(searchTerm)}`)
-              .then(response => response.json())
-              .then(posts => {
-                // Clear previous search results
-                searchResults.innerHTML = '';
+                    // Create and append the title
+                    const title = document.createElement('h3');
+                    title.textContent = post.title;
+                    postContainer.appendChild(title);
 
-                // Display the search results
-                posts.forEach(post => {
-                    const postElement = document.createElement('div');
-                    postElement.textContent = post.title; // Assuming you want to display the post title
-                    searchResults.appendChild(postElement);
-                });
-              })
-              .catch(error => console.error('Error fetching posts:', error));
-            } else {
-              fetch(`/posts?search=${encodeURIComponent(searchTerm)}`)
-              .then(response => response.json())
-              .then(posts => {
-                // Clear previous search results
-                searchResults.innerHTML = '';
+                    // Create and append the author
+                    const author = document.createElement('p');
+                    author.textContent = `Author: ${post.author}`;
+                    postContainer.appendChild(author);
 
-                // Display the search results
-                posts.forEach(post => {
-                    const postElement = document.createElement('div');
-                    postElement.textContent = post.title; // Assuming you want to display the post title
-                    searchResults.appendChild(postElement);
+                    // Create and append the description
+                    const description = document.createElement('p');
+                    description.textContent = `Description: ${post.description}`;
+                    postContainer.appendChild(description);
+
+                    // Append the post container to the search results
+                    searchResults.appendChild(postContainer);
                 });
-              })
-              .catch(error => console.error('Error fetching posts:', error));
-            }
-        });
+            })
+            .catch(error => console.error('Error fetching posts:', error));
+        }
+
+
+        // Determine the URL based on the search section
+        let url;
+        if (searchSec == "Department") {
+            url = `/posts/department?search=${encodeURIComponent(searchTerm)}`;
+        } else if (searchSec == "Selling") {
+            url = `/posts/selling?search=${encodeURIComponent(searchTerm)}`;
+        } else if (searchSec == "Clubs") {
+            url = `/posts/clubs?search=${encodeURIComponent(searchTerm)}`;
+        } else {
+            url = `/posts?search=${encodeURIComponent(searchTerm)}`;
+        }
+
+        // Fetch and display posts
+        fetchAndDisplayPosts(url);
+    });
     });
  </script>
 </body>

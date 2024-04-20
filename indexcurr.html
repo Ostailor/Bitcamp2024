@@ -1,128 +1,47 @@
 <!DOCTYPE html>
 <html lang="en">
 
-
 <head>
-   <link rel="stylesheet" href="style.css">
-   <meta charset="UTF-8">
-   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-   <script src="https://kit.fontawesome.com/b18e0b6367.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://kit.fontawesome.com/b18e0b6367.js" crossorigin="anonymous"></script>
 
-
-   <title>UMD Bulletin</title>
+    <title>UMD Login</title>
 </head>
 
-
 <body>
-   <div class="status-bar">
-       <div class="status-bar__column">
-       </div>
-   </div>
+    <div class="status-bar">
+        <div class="status-bar__column"></div>
+    </div>
 
+    <header class="screen-header">
+        <h1 class="screen-header__title">UMD Login</h1>
+        <div class="screen-header__icons"></div>
+    </header>
 
-   <header class="screen-header">
-       <h1 class="screen-header__title">UMD Bulletin</h1>
-       <div class="screen-header__icons">
-       </div>
+    <main class="main-screen">
+        <div class="user-component">
+            <div class="user-component__column">
+                <div class="user-component__text">
+                    <h4 class="user-component__title">Login</h4>
+                </div>
+                <form action="/login" method="post">
+                    <label for="username">Username:</label>
+                    <input type="text" id="username" name="username" required>
+                    <label for="password">Password:</label>
+                    <input type="password" id="password" name="password" required>
+                    <input type="checkbox" id="remember" name="remember">
+                    <label for="remember">Remember Me</label>
+                    <button type="submit">Login</button>
+                </form>
+                <a href="#">Forgot Password?</a>
+            </div>
+        </div>
+    </main>
 
-
-   </header>
-
-
-   <main class="main-screen">
-       <div class="user-component">
-           <div class="user-component__column">
-               <div class="user-component__text">
-
-
-                   <h4 class="user-component__title">Department</h4>
-               </div>
-               <select class="overflow-auto" size="5">
-                   <option value="option1">CMSC</option>
-                   <option value="option2">ENGR</option>
-               </select>
-
-
-           </div>
-       </div>
-       <div class="user-component__column">
-
-
-       </div>
-       </div>
-       </a>
-       <!-- <a href="selling.html"> -->
-       <div class="user-component">
-           <div class="user-component__column">
-               <!-- <img src="totoro.png" class="user-component__avatar" /> -->
-               <div class="user-component__text">
-                   <h4 class="user-component__title">Selling</h4>
-               </div>
-           </div>
-           <div class="user-component__column">
-
-
-           </div>
-       </div>
-       <!-- <a href="clubs.html"> -->
-       <div class="user-component">
-           <div class="user-component__column">
-               <div class="user-component__text">
-                   <h4 class="user-component__title">Clubs</h4>
-               </div>
-           </div>
-           <div class="user-component__column">
-
-
-           </div>
-       </div>
-
-
-       <div class="user-sign">
-           <div class="user-component">
-               <h4 class="user-component__title">Sign Up</h4>
-               <div class="user-component">
-
-
-                   <h4 class="user-component__title">Log In</h4>
-               </div>
-
-
-           </div>
-
-
-       </div>
-       <div class="user-component__column">
-       </div>
-       </div>
-
-
-
-
-       <form method="post" action="#">
-           <div class="fields">
-               <div class="field half">
-                   <input type="text" name="name" id="name" placeholder="Name" />
-               </div>
-               <div class="field half">
-                   <input type="email" name="email" id="email" placeholder="Email" />
-               </div>
-
-
-           </div>
-           <ul class="actions">
-               <input type="submit" value="Send" class="primary" />
-           </ul>
-       </form>
-
-
-       </a>
-   </main>
-
-
-   <script src="https://kit.fontawesome.com/6478f529f2.js" crossorigin="anonymous"></script>
+    <script src="https://kit.fontawesome.com/6478f529f2.js" crossorigin="anonymous"></script>
 </body>
-
 
 </html>

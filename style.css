@@ -1,50 +1,239 @@
 body {
-    font-family: Arial, sans-serif;
- 
- 
- }
- 
- 
- img {
-    width: 50px;
-    height: 50px;
- }
- 
- 
- .main-screen {
-    display: flex;
- }
- 
- 
- .user-component__text {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-    border: solid black;
-    border-radius: 25px;
-    width: 120px;
- 
- 
-    height: 50px;
-    border: 1px solid black;
-    margin: 10px;
- 
- 
- }
- 
- 
- .overflow-auto {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-    border: solid black;
-    width: 60px;
- 
- 
-    height: 50px;
-    border: 1px solid black;
-    margin: 10px;
- }
- 
+   background-color: #730000; /* UMD's primary color */
+   font-family: Arial, sans-serif;
+   margin: 0;
+   padding: 0;
+}
+
+.main-screen {
+   display: flex;
+   flex-wrap: wrap;
+   justify-content: center;
+   padding: 20px;
+}
+
+.user-component {
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   justify-content: center;
+   width: 200px;
+   margin: 10px;
+   padding: 20px;
+   background-color: #ffffff;
+   border-radius: 10px;
+   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.user-component__text {
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   flex-direction: column;
+   border: 1px solid #ddd;
+   border-radius: 25px;
+   width: 120px;
+   height: 50px;
+   margin: 10px;
+   padding: 10px;
+   text-align: center;
+}
+
+.overflow-auto {
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   flex-direction: column;
+   border: 1px solid #ddd;
+   width: 60px;
+   height: 50px;
+   margin: 10px;
+   padding: 10px;
+   text-align: center;
+}
+
+.fields {
+   display: flex;
+   flex-direction: column;
+   width: 100%;
+   margin-bottom: 20px;
+}
+
+.field {
+   display: flex;
+   flex-direction: column;
+   margin-bottom: 10px;
+}
+
+.field input {
+   padding: 10px;
+   border: 1px solid #ddd;
+   border-radius: 5px;
+   width: 100%;
+}
+
+.actions {
+   display: flex;
+   justify-content: center;
+}
+
+.actions input[type="submit"] {
+   padding: 10px 20px;
+   border: none;
+   border-radius: 5px;
+   background-color: #007BFF;
+   color: white;
+   cursor: pointer;
+}
+
+.actions input[type="submit"]:hover {
+   background-color: #0056b3;
+}
+
+
+.user-sign {
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   justify-content: center;
+   width: 100%;
+   margin: 10px;
+   padding: 20px;
+   background-color: #ffffff;
+   border-radius: 10px;
+   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.login-container {
+   width: 300px;
+   margin: 0 auto;
+   padding: 20px;
+   background-color: white;
+   border-radius: 5px;
+}
+
+.logo {
+   display: block;
+   margin: 0 auto 20px;
+   width: 100px; /* Adjust size as per guidelines */
+}
+
+form {
+   display: flex;
+   flex-direction: column;
+}
+
+label, input, button {
+   margin-bottom: 10px;
+}
+
+button {
+   background-color: #003973;
+   color: white;
+   border: none;
+   padding: 10px;
+   cursor: pointer;
+}
+
+button:hover {
+   background-color: #005799;
+}
+
+a {
+   color: #003973;
+   text-decoration: none;
+}
+
+a:hover {
+   text-decoration: underline;
+}
+
+body {
+   background-color: #003973; /* UMD's primary color */
+   font-family: Arial, sans-serif;
+   margin: 0;
+   padding: 0;
+}
+
+.status-bar {
+   background-color: #003973;
+   height: 50px;
+   display: flex;
+   align-items: center;
+   padding: 0 20px;
+}
+
+.status-bar__column {
+   flex-grow: 1;
+}
+
+.screen-header {
+   background-color: #003973;
+   color: white;
+   padding: 20px;
+   display: flex;
+   justify-content: space-between;
+   align-items: center;
+}
+
+.screen-header__title {
+   margin: 0;
+}
+
+.screen-header__icons {
+   /* Add icons here */
+}
+
+.main-screen {
+   padding: 20px;
+}
+
+.user-component {
+   display: flex;
+   flex-direction: column;
+   margin-bottom: 20px;
+}
+
+.user-component__column {
+   display: flex;
+   flex-direction: column;
+}
+
+.user-component__text {
+   margin-bottom: 10px;
+}
+
+.user-component__title {
+   margin: 0;
+   color: #003973;
+}
+
+form {
+   display: flex;
+   flex-direction: column;
+}
+
+label, input, button {
+   margin-bottom: 10px;
+}
+
+button {
+   background-color: #003973;
+   color: white;
+   border: none;
+   padding: 10px;
+   cursor: pointer;
+}
+
+button:hover {
+   background-color: #005799;
+}
+
+a {
+   color: #003973;
+   text-decoration: none;
+}
+
+a:hover {
+   text-decoration: underline;
+}

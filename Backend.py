@@ -26,8 +26,15 @@ def create_post():
 
 @app.route('/posts', methods=['GET'])
 def get_posts():
-    # Fetch all posts from the MongoDB collection
-    posts = list(collection.find())
+    # Construct a filter dictionary based on query parameters
+    filter_dict = {}
+    for key in ['title', 'author', 'description', 'tab']:
+        if key in request.args:
+            filter_dict[key] = request.args[key]
+    
+    # Fetch filtered posts from the MongoDB collection
+    posts = list(collection.find(filter_dict))
+    
     # Convert the list of posts to JSON and return it
     return jsonify(posts)
 

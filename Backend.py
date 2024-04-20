@@ -24,5 +24,12 @@ def create_post():
     collection.insert_one(post)
     return jsonify({'message': 'Post created successfully'}), 201
 
+@app.route('/posts', methods=['GET'])
+def get_posts():
+    # Fetch all posts from the MongoDB collection
+    posts = list(collection.find())
+    # Convert the list of posts to JSON and return it
+    return jsonify(posts)
+
 if __name__ == '__main__':
     app.run(debug=True)

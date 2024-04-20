@@ -1,14 +1,58 @@
 body {
-   background-color: #730000; /* UMD's primary color */
+   background-color: #FF0000; /* Red background */
    font-family: Arial, sans-serif;
    margin: 0;
    padding: 0;
+   color: #FFFFFF; /* White text for contrast */
+}
+
+.container {
+   display: flex;
+}
+
+.sidebar {
+   width: 250px; /* Fixed width for the sidebar */
+   background-color: #FF0000; /* Red sidebar */
+   color: #FFFFFF; /* White text */
+   padding: 20px;
+}
+
+.main-content {
+   flex-grow: 1; /* Take up the remaining space */
+   padding: 20px;
+   background-color: #FFFFFF; /* White background for main content */
+}
+
+.status-bar {
+   background-color: #FF0000;
+   height: 50px;
+   display: flex;
+   align-items: center;
+   padding: 0 20px;
+}
+
+.status-bar__column {
+   flex-grow: 1;
+}
+
+.screen-header {
+   background-color: #FF0000;
+   color: white;
+   padding: 20px;
+   display: flex;
+   justify-content: space-between;
+   align-items: center;
+}
+
+.screen-header__title {
+   margin: 0;
+}
+
+.screen-header__icons {
+   /* Add icons here */
 }
 
 .main-screen {
-   display: flex;
-   flex-wrap: wrap;
-   justify-content: center;
    padding: 20px;
 }
 
@@ -20,7 +64,7 @@ body {
    width: 200px;
    margin: 10px;
    padding: 20px;
-   background-color: #ffffff;
+   background-color: #FFFFFF; /* White background for components */
    border-radius: 10px;
    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
@@ -81,15 +125,14 @@ body {
    padding: 10px 20px;
    border: none;
    border-radius: 5px;
-   background-color: #007BFF;
+   background-color: #FF0000; /* Red submit button */
    color: white;
    cursor: pointer;
 }
 
 .actions input[type="submit"]:hover {
-   background-color: #0056b3;
+   background-color: #B22222; /* Darker red on hover */
 }
-
 
 .user-sign {
    display: flex;
@@ -99,7 +142,7 @@ body {
    width: 100%;
    margin: 10px;
    padding: 20px;
-   background-color: #ffffff;
+   background-color: #FFFFFF; /* White background for sign-in */
    border-radius: 10px;
    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
@@ -108,7 +151,7 @@ body {
    width: 300px;
    margin: 0 auto;
    padding: 20px;
-   background-color: white;
+   background-color: white; /* White background for login container */
    border-radius: 5px;
 }
 
@@ -128,7 +171,7 @@ label, input, button {
 }
 
 button {
-   background-color: #003973;
+   background-color: #FF0000; /* Red button */
    color: white;
    border: none;
    padding: 10px;
@@ -136,101 +179,11 @@ button {
 }
 
 button:hover {
-   background-color: #005799;
+   background-color: #B22222; /* Darker red on hover */
 }
 
 a {
-   color: #003973;
-   text-decoration: none;
-}
-
-a:hover {
-   text-decoration: underline;
-}
-
-body {
-   background-color: #003973; /* UMD's primary color */
-   font-family: Arial, sans-serif;
-   margin: 0;
-   padding: 0;
-}
-
-.status-bar {
-   background-color: #003973;
-   height: 50px;
-   display: flex;
-   align-items: center;
-   padding: 0 20px;
-}
-
-.status-bar__column {
-   flex-grow: 1;
-}
-
-.screen-header {
-   background-color: #003973;
-   color: white;
-   padding: 20px;
-   display: flex;
-   justify-content: space-between;
-   align-items: center;
-}
-
-.screen-header__title {
-   margin: 0;
-}
-
-.screen-header__icons {
-   /* Add icons here */
-}
-
-.main-screen {
-   padding: 20px;
-}
-
-.user-component {
-   display: flex;
-   flex-direction: column;
-   margin-bottom: 20px;
-}
-
-.user-component__column {
-   display: flex;
-   flex-direction: column;
-}
-
-.user-component__text {
-   margin-bottom: 10px;
-}
-
-.user-component__title {
-   margin: 0;
-   color: #003973;
-}
-
-form {
-   display: flex;
-   flex-direction: column;
-}
-
-label, input, button {
-   margin-bottom: 10px;
-}
-
-button {
-   background-color: #003973;
-   color: white;
-   border: none;
-   padding: 10px;
-   cursor: pointer;
-}
-
-button:hover {
-   background-color: #005799;
-}
-
-a {
-   color: #003973;
+   color: #FF0000; /* Red links */
    text-decoration: none;
 }
 

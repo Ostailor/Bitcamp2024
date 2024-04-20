@@ -10,7 +10,7 @@ collection = db['posts']
 
 @app.route('/')
 def home():
-    return render_template('index.html')
+    return render_template('indexcurr.html')
 
 @app.route('/posts', methods=['POST'])
 def create_post():

@@ -151,7 +151,23 @@
             event.preventDefault(); // Prevent the default form submission
             const searchInput = document.getElementById('search-input');
             const searchResults = document.getElementById('search-results');
-            searchResults.textContent = 'You searched: ' + searchInput.value;
+            const searchTerm = searchInput.value;
+
+            // Send a GET request to the /posts endpoint with the search term as a query parameter
+            fetch(`/posts?search=${encodeURIComponent(searchTerm)}`)
+            .then(response => response.json())
+            .then(posts => {
+                // Clear previous search results
+                searchResults.innerHTML = '';
+
+                // Display the search results
+                posts.forEach(post => {
+                    const postElement = document.createElement('div');
+                    postElement.textContent = post.title; // Assuming you want to display the post title
+                    searchResults.appendChild(postElement);
+                });
+            })
+            .catch(error => console.error('Error fetching posts:', error));
         });
     });
  </script>

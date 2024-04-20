@@ -49,13 +49,24 @@ def get_posts():
     filter_dict = {}
     tab = request.args.get("tab", default=None)
     department = request.args.get("department", default=None)
+    search_term = request.args.get("search", default=None)
+    
     if department is not None:
         filter_dict["Department"] = department
+    if search_term is not None:
+        # Assuming the search term is applied to the title of the posts
+        filter_dict["title"] = {"$regex": search_term, "$options": "i"}
+    
+    # Safely access the collection using the get() method with a default value
+    collection = collections.get(tab, club_collection) # Default to club_collection if tab is None
+
     # Fetch filtered posts from the MongoDB collection
-    posts = list(collections[tab].find())
+    posts = list(collection.find(filter_dict))
 
     # Convert the list of posts to JSON and return it
-    return jsonify(posts), 400
+    return jsonify(posts), 200
+
+
 
 
 if __name__ == '__main__':

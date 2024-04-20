@@ -2,8 +2,7 @@ from flask import Flask, render_template, request, jsonify
 from pymongo import MongoClient
 import certifi
 from urllib.parse import quote_plus
-
-ca = certifi.where()
+from bson import json_util
 
 app = Flask(__name__)
 uri = "mongodb+srv://otailor25:m2r5wma6Cr2370jS@cluster0.pqoemmx.mongodb.net"
@@ -22,7 +21,8 @@ collections = {
 
 @app.route("/")
 def home():
-    return render_template('indexcurr.html')
+    return render_template("indexcurr.html")
+
 
 @app.route("/posts", methods=["POST"])
 def create_post():
@@ -50,24 +50,24 @@ def get_posts():
     tab = request.args.get("tab", default=None)
     department = request.args.get("department", default=None)
     search_term = request.args.get("search", default=None)
-    
+
     if department is not None:
         filter_dict["Department"] = department
     if search_term is not None:
         # Assuming the search term is applied to the title of the posts
-        filter_dict["title"] = {"$regex": search_term, "$options": "i"}
-    
+        filter_dict["title"] = search_term
+
     # Safely access the collection using the get() method with a default value
-    collection = collections.get(tab, club_collection) # Default to club_collection if tab is None
+    collection = collections.get(
+        tab, club_collection
+    )  # Default to club_collection if tab is None
 
     # Fetch filtered posts from the MongoDB collection
     posts = list(collection.find(filter_dict))
-
     # Convert the list of posts to JSON and return it
-    return jsonify(posts), 200
+    data = json_util.dumps(posts)
+    return data, 200
 
 
-
-
-if __name__ == '__main__':
-    app.run(debug=True)
+if __name__ == "__main__":
+    app.run(debug=True, port=5001)

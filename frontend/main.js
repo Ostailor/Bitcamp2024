@@ -17,6 +17,7 @@ const windowCloser = document.getElementById("close-popup");
 const popupHeading = document.getElementById("popup-title");
 const searchSection = document.getElementById("section-name");
 const sidebar = document.querySelector(".sidebar");
+let username = "";
 
 document.getElementById("signup").onclick = authClient.redirectToSignupPage;
 document.getElementById("login").onclick = authClient.redirectToLoginPage;
@@ -27,11 +28,16 @@ authClient.addLoggedInChangeObserver((isLoggedIn) => {
   if (isLoggedIn) {
     document.getElementById("display-when-logged-in").style.display = "revert";
     document.getElementById("display-when-logged-out").style.display = "none";
-    makePosts.style.display = "inline-block";
+    if (searchSection.textContent === "Welcome") {
+      makePosts.style.display = "none";
+    } else {
+      makePosts.style.display = "inline-block";
+    }
 
     // Get authentication info and set email to it
     authClient.getAuthenticationInfoOrNull().then((authInfo) => {
       document.getElementById("username").innerHTML = authInfo?.user?.username;
+      username = authInfo?.user?.username;
     });
   } else {
     document.getElementById("display-when-logged-in").style.display = "none";
@@ -52,32 +58,23 @@ const showModalWindow = () => {
     // Show the dropdown menu
     departmentSelect.style.display = "inline-block";
     // You might want to add logic here to handle the form submission based on the selected department
- } else {
-    departmentSelect.style.display = "none" ;
- }
-
- if (searchSection.textContent === "Welcome") {
-  // Hide the make-posts button
-  makePostButton.style.display = "none";
-} else {
-  // Show the make-posts button
-  makePostButton.style.display = "inline-block";
-}
-  
+  } else {
+    departmentSelect.style.display = "none";
+  }
 };
 
 makePosts.addEventListener("click", showModalWindow);
 windowCloser.addEventListener("click", closeWindow);
 
 document.addEventListener("DOMContentLoaded", function () {
-  // Select all sidebar links
   const sidebarLinks = document.querySelectorAll(".sidebar ul li a");
   const homeButton = document.querySelector("#umd-bulletin");
   homeButton.addEventListener("click", function (event) {
     const sectionName = "Welcome";
     document.getElementById("section-name").textContent = sectionName;
-
+    // Show the make-posts button
     // Change the page title
+    makePosts.style.display = "none";
     document.title = sectionName + " - UMD Bulletin";
   });
 
@@ -89,12 +86,12 @@ document.addEventListener("DOMContentLoaded", function () {
       if (this.textContent !== "Logout") {
         event.preventDefault(); // Prevent the default link behavior
         const sectionName = this.textContent; // Get the text of the clicked link
-
         // Update the section name placeholder
         document.getElementById("section-name").textContent = sectionName;
-
-        // Change the page title
+        makePosts.style.display = "inline-block";
         document.title = sectionName + " - UMD Bulletin";
+        let fakeEvent = new Event("click");
+        document.getElementById("search-button").dispatchEvent(fakeEvent);
       }
     });
   });
@@ -124,7 +121,7 @@ document.addEventListener("DOMContentLoaded", function () {
           .then((posts) => {
             // Clear previous search results
             searchResults.innerHTML = "";
-
+            posts.reverse();
             // Display the search results
             posts.forEach((post) => {
               // Create a container for each post
@@ -140,7 +137,11 @@ document.addEventListener("DOMContentLoaded", function () {
               const author = document.createElement("p");
               author.textContent = `Author: ${post.author}`;
               postContainer.appendChild(author);
-
+              if (searchSec == "Department") {
+                const department = document.createElement("p");
+                department.textContent = `Department: ${post.tab}`;
+                postContainer.appendChild(department);
+              }
               // Create and append the description
               const description = document.createElement("p");
               description.textContent = `Description: ${post.description}`;
@@ -155,53 +156,46 @@ document.addEventListener("DOMContentLoaded", function () {
 
       // Determine the URL based on the search section
       let url = DOMAIN_NAME;
+      let searchUrl = `search=${encodeURIComponent(searchTerm)}`;
+      if (searchTerm === "") {
+        searchUrl = "";
+      }
       if (searchSec == "Department") {
-        url += `/posts/department?search=${encodeURIComponent(searchTerm)}`;
+        url += `/posts/department?` + searchUrl;
       } else if (searchSec == "Selling") {
-        url += `/posts/selling?search=${encodeURIComponent(searchTerm)}`;
+        url += `/posts/selling?` + searchUrl;
       } else if (searchSec == "Clubs") {
-        url += `/posts/clubs?search=${encodeURIComponent(searchTerm)}`;
+        url += `/posts/clubs?` + searchUrl;
       } else {
-        url += `/posts?search=${encodeURIComponent(searchTerm)}`;
+        url += `/posts?` + searchUrl;
       }
 
       // Fetch and display posts
       fetchAndDisplayPosts(url);
     });
 
-
-  document.addEventListener("DOMContentLoaded", function () {
-    const umdBulletin = document.getElementById("umd-bulletin");
-    const sectionName = document.getElementById("section-name");
-
-    umdBulletin.addEventListener("click", function () {
-      sectionName.textContent = "Welcome";
-      // Additional logic to navigate to the welcome section can be added here
-    });
-  });
-
   const makePostButton = document.getElementById("make-post-button");
   const departmentSelect = document.getElementById("department-select");
   const sectionName = document.getElementById("section-name");
   console.log(sectionName);
-makePostButton.addEventListener("click", function (event) {
- event.preventDefault(); // Prevent the default form submission
- let tab = searchSection.textContent;
- // Check if the current section is "Department"
- if (sectionName.textContent === "Department") {
-    // Show the dropdown menu
-    tab = departmentSelect.value
-    // You might want to add logic here to handle the form submission based on the selected department
- } 
+  makePostButton.addEventListener("click", function (event) {
+    event.preventDefault(); // Prevent the default form submission
+    let tab = searchSection.textContent;
+    // Check if the current section is "Department"
+    if (sectionName.textContent === "Department") {
+      // Show the dropdown menu
+      tab = departmentSelect.value;
+      // You might want to add logic here to handle the form submission based on the selected department
+    }
     // Proceed with the existing logic for other sections
     const title = document.getElementById("title-input").value;
     const description = document.getElementById("description").value;
-   // Example value, adjust as needed
+    // Example value, adjust as needed
 
     // Construct the data object
     const data = {
       title: title,
-      author: "Author Name", // Replace with actual author data
+      author: username, // Replace with actual author data
       description: description,
       tab: tab,
     };
@@ -224,6 +218,10 @@ makePostButton.addEventListener("click", function (event) {
         console.error("Error:", error);
         // Handle error, e.g., show an error message
       });
-});
+    let fakeEvent = new Event("click");
+    document.getElementById("search-button").dispatchEvent(fakeEvent);
+  });
 
+  let fakeEvent = new Event("click");
+  document.getElementById("search-button").dispatchEvent(fakeEvent);
 });

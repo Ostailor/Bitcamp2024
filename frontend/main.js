@@ -8,7 +8,7 @@ const authClient = createClient({
   enableBackgroundTokenRefresh: true,
 });
 
-let DOMAIN_NAME = "http://localhost:5001";
+let DOMAIN_NAME = "http://ec2-18-188-148-3.us-east-2.compute.amazonaws.com";
 
 const makePosts = document.getElementById("make-posts");
 const makePostButton = document.getElementById("post-container");

@@ -1,7 +1,5 @@
-from flask import Flask, render_template, request, jsonify
+from flask import Flask, request, jsonify
 from pymongo import MongoClient
-import certifi
-from urllib.parse import quote_plus
 from bson import json_util
 from flask_cors import CORS
 
@@ -19,11 +17,6 @@ collections = {
     "department": department_collection,
     "selling": selling_collection,
 }
-
-
-@app.route("/")
-def home():
-    return render_template("indexcurr.html")
 
 
 @app.route("/create", methods=["POST"])
@@ -71,10 +64,9 @@ def get_posts():
     for collection in collections.values():
         posts = list(collection.find(filter_dict))
         all_posts = all_posts + posts
-        print(all_posts)
 
     # Convert the list of posts to JSON and return it
-    
+
     data = json_util.dumps(all_posts)
     return data, 200
 
@@ -151,4 +143,4 @@ def get_posts_clubs():
 
 
 if __name__ == "__main__":
-    app.run(debug=True, port=5001)
+    app.run(host="0.0.0.0", port=5000)

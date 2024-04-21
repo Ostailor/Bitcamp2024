@@ -76,6 +76,8 @@ document.addEventListener("DOMContentLoaded", function () {
     // Change the page title
     makePosts.style.display = "none";
     document.title = sectionName + " - UMD Bulletin";
+    let fakeEvent = new Event("click");
+    document.getElementById("search-button").dispatchEvent(fakeEvent);
   });
 
   // Add click event listener to each link

@@ -11,6 +11,7 @@ const authClient = createClient({
 let DOMAIN_NAME = "http://localhost:5001";
 
 const makePosts = document.getElementById("make-posts");
+const makePostButton = document.getElementById("post-container");
 const modalWindowOverlay = document.getElementById("modal-overlay");
 const windowCloser = document.getElementById("close-popup");
 const popupHeading = document.getElementById("popup-title");
@@ -46,6 +47,23 @@ const closeWindow = () => {
 const showModalWindow = () => {
   modalWindowOverlay.style.display = "flex";
   popupHeading.innerHTML = `Make post to: ${searchSection.textContent}`;
+  const departmentSelect = document.getElementById("department-select");
+  if (searchSection.textContent === "Department") {
+    // Show the dropdown menu
+    departmentSelect.style.display = "inline-block";
+    // You might want to add logic here to handle the form submission based on the selected department
+ } else {
+    departmentSelect.style.display = "none" ;
+ }
+
+ if (searchSection.textContent === "Welcome") {
+  // Hide the make-posts button
+  makePostButton.style.display = "none";
+} else {
+  // Show the make-posts button
+  makePostButton.style.display = "inline-block";
+}
+  
 };
 
 makePosts.addEventListener("click", showModalWindow);
@@ -150,6 +168,8 @@ document.addEventListener("DOMContentLoaded", function () {
       // Fetch and display posts
       fetchAndDisplayPosts(url);
     });
+
+
   document.addEventListener("DOMContentLoaded", function () {
     const umdBulletin = document.getElementById("umd-bulletin");
     const sectionName = document.getElementById("section-name");
@@ -161,13 +181,22 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 
   const makePostButton = document.getElementById("make-post-button");
-  makePostButton.addEventListener("click", function (event) {
-    event.preventDefault(); // Prevent the default form submission
-
-    // Gather form data
+  const departmentSelect = document.getElementById("department-select");
+  const sectionName = document.getElementById("section-name");
+  console.log(sectionName);
+makePostButton.addEventListener("click", function (event) {
+ event.preventDefault(); // Prevent the default form submission
+ let tab = searchSection.textContent;
+ // Check if the current section is "Department"
+ if (sectionName.textContent === "Department") {
+    // Show the dropdown menu
+    tab = departmentSelect.value
+    // You might want to add logic here to handle the form submission based on the selected department
+ } 
+    // Proceed with the existing logic for other sections
     const title = document.getElementById("title-input").value;
     const description = document.getElementById("description").value;
-    const tab = searchSection.textContent; // Example value, adjust as needed
+   // Example value, adjust as needed
 
     // Construct the data object
     const data = {
@@ -195,5 +224,6 @@ document.addEventListener("DOMContentLoaded", function () {
         console.error("Error:", error);
         // Handle error, e.g., show an error message
       });
-  });
+});
+
 });

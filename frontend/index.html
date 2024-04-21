@@ -21,13 +21,17 @@
       <form>
         <div class="form-container">
           <input type="text" id="title-input" placeholder="Title">
-
-          <textarea id="description" name="description" rows="4" cols="60"
-            placeholder="Enter description here"></textarea>
-        </div>
-
-
-        <div class="post-container"><Button id="make-post-button" type="submit=">Make Post</Button></div>
+          <textarea id="description" name="description" rows="4" cols="60" placeholder="Enter description here"></textarea>
+          <!-- Dropdown for selecting department -->
+          <select id="department-select">
+             <option>CMSC</option>
+             <option>ENGR</option>
+             <!-- Add more options as needed -->
+          </select>
+         </div>
+         <div class="post-container">
+          <Button id="make-post-button" type="submit">Make Post</Button>
+         </div>
       </form>
     </div>
   </div>

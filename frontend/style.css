@@ -1,96 +1,256 @@
-:root {
-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
-
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
-
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
-a {
-  font-weight: 500;
-  color: #646cff;
-  text-decoration: inherit;
-}
-a:hover {
-  color: #535bf2;
-}
+@import "@fortawesome/fontawesome-free/css/all.css";
 
 body {
+  font-family: Arial, sans-serif;
   margin: 0;
+  padding: 0;
+  overflow: hidden; /* Prevent body from scrolling */
+  height: 100vh; /* Ensure body takes up the full viewport height */
+}
+
+#modal-overlay {
+  width: 100%;
+  height: 100vh;
+  position: absolute;
+  background: rgba(0, 0, 0, 0.7);
+  display: none;
+  align-items: center;
+  justify-content: center;
+}
+
+#modal-overlay #modal {
+  padding: 20px 20px 20px 20px;
+  max-width: 650px;
+  width: 100%;
+  background: white;
+  height: 400px;
+}
+
+#popup-title {
+  position: relative;
+  left: 86px;
+  margin-top: 5px;
+  margin-bottom: 20px;
+  font-size: 30px;
+}
+
+.post-container {
+  width: 75%;
+  text-align: right;
+}
+
+.form-container {
+  max-width: 72%;
+}
+
+#title-input {
+  font-size: 20px;
+  width: 50%;
+  border-radius: 5px;
+  box-shadow: 0px 4px 5px rgb(0, 0, 0, 0.1);
+  width: 100%;
+}
+
+#description {
+  margin-top: 20px;
+  margin-bottom: 20px;
+  height: 200px;
+  resize: none;
+  border-radius: 5px;
+  box-shadow: 0px 4px 5px rgb(0, 0, 0, 0.1);
+}
+
+form {
+  font-size: 20px;
   display: flex;
-  place-items: center;
-  min-width: 320px;
-  min-height: 100vh;
+  flex-direction: column;
+  align-items: center;
 }
 
-h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
+#popup-heading {
+  display: flex;
+  justify-content: space-between;
+}
+#popup-heading > h4 {
+  margin: 0px 0px 0px 0px;
 }
 
-#app {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
+#make-post-button {
+  border: none;
+  transition: 0.5s;
+  height: fit-content;
+  padding: 10px 20px 10px 20px;
+  font-size: 15px;
+  border-radius: 12px;
+  background-color: rgb(159, 33, 33);
+  color: white;
+  border: black 1px solid;
+}
+
+#make-post-button:hover {
+  background-color: rgb(216, 38, 38);
+  border: black 1px solid;
+}
+
+#close-popup {
+  border: none;
+  transition: 0.5s;
+  height: fit-content;
+}
+
+#make-posts {
+  border-radius: 5px;
+  border: 1px black solid;
+  box-shadow: 0px 4px 5px rgb(0, 0, 0, 0.2);
+}
+
+#options-total {
+  width: 100%;
+}
+
+.sidebar-options {
+  width: fill-available;
+  background-color: #333;
+  transition: background-color 0.4s;
+  width: 100%;
+}
+
+.sidebar-options > a {
+  width: fill-available;
+  height: fill-available;
+  width: 100%;
+  height: 100%;
+  display: inline-block;
+}
+
+.sidebar-options:hover {
+  background-color: brown;
+}
+
+.container {
+  display: flex;
+  height: 100vh; /* Ensure container takes up the full viewport height */
+}
+
+.sidebar {
+  width: 250px;
+  background-color: #333;
+  color: #fff;
+  height: 100vh; /* Ensure sidebar takes up the full viewport height */
+  padding-top: 20px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19); /* Shadow box */
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  overflow-y: auto; /* Enable vertical scrolling if content overflows */
+}
+
+.sidebar h1 {
+  color: #fff;
+  padding: 10px;
+  margin: 0;
+  background-color: #333;
   text-align: center;
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.vanilla:hover {
-  filter: drop-shadow(0 0 2em #f7df1eaa);
+#search-button {
+  width: 40px;
+  height: 40px;
 }
 
-.card {
-  padding: 2em;
+.sidebar ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
 }
 
-.read-the-docs {
-  color: #888;
+.sidebar ul li {
+  padding: 10px;
 }
 
-button {
-  border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
-  font-weight: 500;
-  font-family: inherit;
-  background-color: #1a1a1a;
+.sidebar ul li a {
+  color: #fff;
+  text-decoration: none;
+}
+
+#auth {
+  margin-top: 160%; /* Push the logout button to the bottom */
+}
+
+#search-results {
+  overflow: auto;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: 1rem;
+  border: 1px solid black;
+  border-radius: 5px;
+  box-shadow: 0 5px 5px rgba(0, 0, 0, 0.1);
+  width: 1100px;
+  height: 500px;
+  margin-top: 20px;
+  background-color: #877171;
+}
+
+.content {
+  flex: 1;
+  padding: 20px;
+  overflow-y: auto;
+  background-color: #ccc; /* Enable vertical scrolling if content overflows */
+}
+
+/* Search bar styles */
+.search-container {
+  margin: 20px;
+}
+
+.search-container input[type="text"] {
+  padding: 6px;
+  margin-top: 8px;
+  font-size: 17px;
+  border: solid 1px black;
+  width: 80%;
+}
+
+.search-container button {
+  padding: 6px 10px;
+  margin-top: 8px;
+  margin-right: 16px;
+  background: #ddd;
+  font-size: 17px;
+  border: none;
   cursor: pointer;
-  transition: border-color 0.25s;
-}
-button:hover {
-  border-color: #646cff;
-}
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
+  transition: background 0.3s ease;
+  color: #333;
+  background-image: url("search-icon.png"); /* Path to your search icon image */
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
 }
 
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
-  }
-  a:hover {
-    color: #747bff;
-  }
-  button {
-    background-color: #f9f9f9;
-  }
+#search-button {
+  /* background-color: rgb(245, 245, 245); */
+  /* transition: background 0.3s ease; */
+}
+
+.search-container button:hover {
+  background: #ccc;
+}
+
+.post-box {
+  border: 1px solid black;
+  padding: 10px;
+  margin: 10px 10px 10px 10px;
+  border-radius: 10px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.4);
+  height: 200px;
+  background-color: rgb(245, 245, 245);
+  color: black;
+}
+
+.post-box h3 {
+  margin: 0 0 5px 0;
+}
+
+.post-box p {
+  margin: 0 0 5px 0;
 }

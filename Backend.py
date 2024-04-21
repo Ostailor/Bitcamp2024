@@ -3,8 +3,10 @@ from pymongo import MongoClient
 import certifi
 from urllib.parse import quote_plus
 from bson import json_util
+from flask_cors import CORS
 
 app = Flask(__name__)
+CORS(app)
 uri = "mongodb+srv://otailor25:m2r5wma6Cr2370jS@cluster0.pqoemmx.mongodb.net"
 # Connect to MongoDB
 client = MongoClient(uri)
@@ -59,9 +61,11 @@ def get_posts():
         filter_dict["title"] = search_term
         filter_dict["author"] = search_term
         filter_dict["description"] = search_term
-        new_dict["$or"] = [{"title": filter_dict["title"]},
-                           {"author": filter_dict["author"]},
-                           {"description": filter_dict["description"]}]
+        new_dict["$or"] = [
+            {"title": filter_dict["title"]},
+            {"author": filter_dict["author"]},
+            {"description": filter_dict["description"]},
+        ]
 
     # Initialize an empty list to store the results from all collections
     all_posts = []
@@ -92,9 +96,11 @@ def get_posts_department():
         filter_dict["title"] = search_term
         filter_dict["author"] = search_term
         filter_dict["description"] = search_term
-        new_dict["$or"] = [{"title": filter_dict["title"]},
-                           {"author": filter_dict["author"]},
-                           {"description": filter_dict["description"]}]
+        new_dict["$or"] = [
+            {"title": filter_dict["title"]},
+            {"author": filter_dict["author"]},
+            {"description": filter_dict["description"]},
+        ]
 
     posts = list(department_collection.find(filter_dict))
 
@@ -115,15 +121,18 @@ def get_posts_selling():
         filter_dict["title"] = search_term
         filter_dict["author"] = search_term
         filter_dict["description"] = search_term
-        new_dict["$or"] = [{"title": filter_dict["title"]},
-                           {"author": filter_dict["author"]},
-                           {"description": filter_dict["description"]}]
+        new_dict["$or"] = [
+            {"title": filter_dict["title"]},
+            {"author": filter_dict["author"]},
+            {"description": filter_dict["description"]},
+        ]
 
     print(f"Search term: {search_term}, Filter: {filter_dict}")  # Debugging line
     posts = list(selling_collection.find(filter_dict))
 
     data = json_util.dumps(posts)
     return data, 200
+
 
 @app.route("/posts/clubs", methods=["GET"])
 def get_posts_clubs():
@@ -138,15 +147,18 @@ def get_posts_clubs():
         filter_dict["title"] = search_term
         filter_dict["author"] = search_term
         filter_dict["description"] = search_term
-        new_dict["$or"] = [{"title": filter_dict["title"]},
-                           {"author": filter_dict["author"]},
-                           {"description": filter_dict["description"]}]
-
+        new_dict["$or"] = [
+            {"title": filter_dict["title"]},
+            {"author": filter_dict["author"]},
+            {"description": filter_dict["description"]},
+        ]
 
     print(f"Search term: {search_term}, Filter: {filter_dict}")  # Debugging line
     posts = list(club_collection.find(new_dict))
 
     data = json_util.dumps(posts)
     return data, 200
+
+
 if __name__ == "__main__":
     app.run(debug=True, port=5001)

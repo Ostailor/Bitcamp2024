@@ -26,7 +26,7 @@ def home():
     return render_template("indexcurr.html")
 
 
-@app.route("/posts", methods=["POST"])
+@app.route("/create", methods=["POST"])
 def create_post():
     data = request.get_json()
     post = {
@@ -58,13 +58,10 @@ def get_posts():
     if search_term is not None:
         # Assuming the search term is applied to the title of the posts
         # For MongoDB, you can use a regular expression for case-insensitive search
-        filter_dict["title"] = search_term
-        filter_dict["author"] = search_term
-        filter_dict["description"] = search_term
-        new_dict["$or"] = [
-            {"title": filter_dict["title"]},
-            {"author": filter_dict["author"]},
-            {"description": filter_dict["description"]},
+        filter_dict["$or"] = [
+            {"title": search_term},
+            {"author": search_term},
+            {"description": search_term},
         ]
 
     # Initialize an empty list to store the results from all collections
@@ -74,8 +71,10 @@ def get_posts():
     for collection in collections.values():
         posts = list(collection.find(filter_dict))
         all_posts = all_posts + posts
+        print(all_posts)
 
     # Convert the list of posts to JSON and return it
+    
     data = json_util.dumps(all_posts)
     return data, 200
 

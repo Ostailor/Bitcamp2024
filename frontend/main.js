@@ -54,11 +54,20 @@ windowCloser.addEventListener("click", closeWindow);
 document.addEventListener("DOMContentLoaded", function () {
   // Select all sidebar links
   const sidebarLinks = document.querySelectorAll(".sidebar ul li a");
+  const homeButton = document.querySelector("#umd-bulletin");
+  homeButton.addEventListener("click", function(event) {
+    const sectionName = "Welcome";
+    document.getElementById("section-name").textContent = sectionName;
+
+        // Change the page title
+    document.title = sectionName + " - UMD Bulletin";
+  });
 
   // Add click event listener to each link
   sidebarLinks.forEach((link) => {
     link.addEventListener("click", function (event) {
       // Check if the clicked link is the logout link
+      
       if (this.textContent !== "Logout") {
         event.preventDefault(); // Prevent the default link behavior
         const sectionName = this.textContent; // Get the text of the clicked link
@@ -141,4 +150,52 @@ document.addEventListener("DOMContentLoaded", function () {
       // Fetch and display posts
       fetchAndDisplayPosts(url);
     });
+    document.addEventListener('DOMContentLoaded', function() {
+      const umdBulletin = document.getElementById('umd-bulletin');
+      const sectionName = document.getElementById('section-name');
+  
+      umdBulletin.addEventListener('click', function() {
+        sectionName.textContent = 'Welcome';
+        // Additional logic to navigate to the welcome section can be added here
+      });
+   });
+
+   document.addEventListener('DOMContentLoaded', function() {
+    const makePostButton = document.getElementById('make-post-button');
+    makePostButton.addEventListener('click', function(event) {
+        event.preventDefault(); // Prevent the default form submission
+
+        // Gather form data
+        const title = document.getElementById('title-input').value;
+        const description = document.getElementById('description').value;
+        const tab = 'Clubs'; // Example value, adjust as needed
+
+        // Construct the data object
+        const data = {
+            title: title,
+            author: 'Author Name', // Replace with actual author data
+            description: description,
+            tab: tab
+        };
+
+        // Send POST request to the updated endpoint
+        fetch('/create', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(data),
+        })
+        .then(response => response.json())
+        .then(data => {
+            console.log('Success:', data);
+            // Handle success, e.g., show a success message or redirect
+        })
+        .catch((error) => {
+            console.error('Error:', error);
+            // Handle error, e.g., show an error message
+        });
+    });
+});
+
 });

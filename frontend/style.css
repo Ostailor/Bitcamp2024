@@ -254,3 +254,14 @@ form {
 .post-box p {
   margin: 0 0 5px 0;
 }
+.custom-link {
+  text-decoration: none;
+  color: white;
+ }
+
+ #umd-bulletin {
+  text-align: center; /* Centers the text horizontally */
+ }
+
+ 
+

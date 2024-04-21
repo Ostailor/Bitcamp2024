@@ -54,7 +54,7 @@ def get_posts():
     search_term = request.args.get("search", default=None)
 
     if department is not None:
-        filter_dict["Department"] = department
+        filter_dict["department"] = department
     if search_term is not None:
         # Assuming the search term is applied to the title of the posts
         # For MongoDB, you can use a regular expression for case-insensitive search
@@ -92,13 +92,10 @@ def get_posts_department():
     if search_term is not None:
         # Assuming the search term is applied to the title of the posts
         # For MongoDB, you can use a regular expression for case-insensitive search
-        filter_dict["title"] = search_term
-        filter_dict["author"] = search_term
-        filter_dict["description"] = search_term
-        new_dict["$or"] = [
-            {"title": filter_dict["title"]},
-            {"author": filter_dict["author"]},
-            {"description": filter_dict["description"]},
+        filter_dict["$or"] = [
+            {"title": search_term},
+            {"author": search_term},
+            {"description": search_term},
         ]
 
     posts = list(department_collection.find(filter_dict))
@@ -117,13 +114,10 @@ def get_posts_selling():
     if search_term is not None:
         # Assuming the search term is applied to the title of the posts
         # For MongoDB, you can use a regular expression for case-insensitive search
-        filter_dict["title"] = search_term
-        filter_dict["author"] = search_term
-        filter_dict["description"] = search_term
-        new_dict["$or"] = [
-            {"title": filter_dict["title"]},
-            {"author": filter_dict["author"]},
-            {"description": filter_dict["description"]},
+        filter_dict["$or"] = [
+            {"title": search_term},
+            {"author": search_term},
+            {"description": search_term},
         ]
 
     print(f"Search term: {search_term}, Filter: {filter_dict}")  # Debugging line
@@ -143,13 +137,10 @@ def get_posts_clubs():
     if search_term is not None:
         # Assuming the search term is applied to the title of the posts
         # For MongoDB, you can use a regular expression for case-insensitive search
-        filter_dict["title"] = search_term
-        filter_dict["author"] = search_term
-        filter_dict["description"] = search_term
-        new_dict["$or"] = [
-            {"title": filter_dict["title"]},
-            {"author": filter_dict["author"]},
-            {"description": filter_dict["description"]},
+        filter_dict["$or"] = [
+            {"title": search_term},
+            {"author": search_term},
+            {"description": search_term},
         ]
 
     print(f"Search term: {search_term}, Filter: {filter_dict}")  # Debugging line

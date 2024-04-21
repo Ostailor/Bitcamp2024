@@ -176,7 +176,7 @@ document.addEventListener("DOMContentLoaded", function () {
       description: description,
       tab: tab,
     };
-
+    console.log(data);
     // Send POST request to the updated endpoint
     fetch(DOMAIN_NAME + "/create", {
       method: "POST",

@@ -8,7 +8,7 @@ This is a special kind of web application that allows University of Maryland Stu
 
 ## Usage
 
-Go to the dest folder and use Visual Studio Code Live Server Extension to run index.html. The backend is already configured with an EC2 instance so there is no need to worry about it. To run the dev build for the project you will need to cd into the frontend folder and then run npm i and after that run npm run dev. 
+Go to the dist folder and use Visual Studio Code Live Server Extension to run index.html. The backend is already configured with an EC2 instance so there is no need to worry about it. To run the dev build for the project you will need to cd into the frontend folder and then run npm i and after that run npm run dev. 
 
 ## Credits
 

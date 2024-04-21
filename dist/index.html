@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sidebar Page</title>
+  <style>
+
+  </style>
+  <script type="module" crossorigin src="./assets/index-BSrxBHtD.js"></script>
+  <link rel="stylesheet" crossorigin href="./assets/index-Fi-7GjEY.css">
+</head>
+
+<body>
+  <div id="modal-overlay">
+    <div id="modal">
+      <div id="popup-heading">
+        <h3 id="popup-title">
+        </h3>
+        <Button id="close-popup"><i class="fa-solid fa-x"></i></Button>
+      </div>
+      <form>
+        <div class="form-container">
+          <input type="text" id="title-input" placeholder="Title">
+          <textarea id="description" name="description" rows="4" cols="60"
+            placeholder="Enter description here"></textarea>
+          <!-- Dropdown for selecting department -->
+          <select id="department-select">
+            <option>CMSC</option>
+            <option>ENGR</option>
+            <!-- Add more options as needed -->
+          </select>
+        </div>
+        <div class="post-container">
+          <Button id="make-post-button" type="submit">Make Post</Button>
+        </div>
+      </form>
+    </div>
+  </div>
+  <div class="container">
+    <nav class="sidebar">
+      <h1 class="sidebar-options" id="umd-bulletin"><a href="#" class="custom-link">UMD Bulletin</a></h1>
+      <ul id="options-total">
+
+        <li class="sidebar-options"><a href="#">Department</a></li>
+        <li class="sidebar-options"><a href="#">Selling</a></li>
+        <li class="sidebar-options"><a href="#">Clubs</a></li>
+      </ul>
+      <ul id="auth" class="nav nav-sidebar">
+        <div id="display-when-logged-out">
+          <li id="signup"><a href="#">Sign Up</a></li>
+          <li id="login"><a href="#">Login</a></li>
+        </div>
+        <div id="display-when-logged-in">
+          <li id="username"></li>
+          <li id="logout"><a href="#">Logout</a></li>
+        </div>
+      </ul>
+    </nav>
+    <main class="content">
+      <h2 id="section-name">Welcome</h2>
+      <div class="search-container">
+        <input type="text" id="search-input" placeholder="Search..." name="search">
+        <button id="search-button" type="submit"><i class="fa fa-search" aria-hidden="true"></i></button>
+        <button id="make-posts">make posts</button>
+      </div>
+      <div id="search-results">
+      </div>
+      <!-- Main content goes here -->
+    </main>
+  </div>
+
+</body>
+
+</html>

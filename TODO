@@ -3,8 +3,11 @@ Allow it to work with mobile
 Expand on categories
 Deploy the frontend
 Add the ability to like and share posts
+Clicking on a post expands it and allows the user to scroll through it. 
 The more posts people like the more they see them (AI algorithm)
-Add the ability to follow others
-Add the ability to add events to personal calendar
+Add the ability to follow others. (Clicking the author on the post opens their page.)
+Add the ability to add events to personal calendar (Like google calendar/apple calendar)
 Add the ability to view the event locations on a map
 Add the ability to see user profiles
+Shoutout section where different orgs can shout out something to their followers. 
+Notifications for followers and from the ai algo. 

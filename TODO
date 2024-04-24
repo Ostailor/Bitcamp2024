@@ -11,3 +11,4 @@ Add the ability to view the event locations on a map
 Add the ability to see user profiles
 Shoutout section where different orgs can shout out something to their followers. 
 Notifications for followers and from the ai algo. 
+Rewrite the code base into react follow GOOD principles
